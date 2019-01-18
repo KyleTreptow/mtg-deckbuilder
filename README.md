@@ -2,6 +2,10 @@
 
 We're going to be making use of https://magicthegathering.io/ for all of our data.
 
+- https://github.com/MagicTheGathering/mtg-sdk-javascript
+
+- https://docs.magicthegathering.io/
+
 Basic idea is to be able to search for specific cards and add them to 'decks' and/or 'sidebards'
 
 ### Stack
