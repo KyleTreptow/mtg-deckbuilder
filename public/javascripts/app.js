@@ -3,7 +3,6 @@ const app = new Vue({
     data(){
       return {
         loading: true,
-        message: msg,
         items: []
       }
     },

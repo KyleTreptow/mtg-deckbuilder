@@ -3,7 +3,7 @@ extends layout
 block content
   div(id='app')
     h1 #{title}
-    div {{message}}
+    div #{msg}
     h2 Vue List:
     p(v-if="loading") 
       b Loading Items...
@@ -15,7 +15,5 @@ block content
           img(v-bind:src="item.imageUrl")
     
   script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
-  script.
-    var msg = "#{msg}"
   script(src='/javascripts/app.js')
     

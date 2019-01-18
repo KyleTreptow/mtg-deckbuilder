@@ -7,7 +7,7 @@ var mtg = require('mtgsdk');
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'MTG Deck Builder',
-    msg: 'App Init: data passed to vue!'
+    msg: 'Grabbing Sample Cards: subtype = God OR Praetor'
   });
 });
 
