@@ -11,9 +11,6 @@ const app = new Vue({
       this.fetchData();
     },
     methods: {
-      test(){
-        alert('test...')
-      },
       fetchData(){
         const that = this;
         fetch('/cards/')
