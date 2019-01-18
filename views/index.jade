@@ -5,11 +5,12 @@ block content
     h1 #{title}
     div {{message}}
     h2 Vue List:
-    ul 
-      li(v-if="loading") 
-        b Loading Items...
-      li(v-else, v-for="item in items") 
-        b {{item.name}}
+    p(v-if="loading") 
+      b Loading Items...
+    ul(v-else)   
+      li(v-for="item in items") 
+        p
+          b {{item.name}} 
         div
           img(v-bind:src="item.imageUrl")
     
