@@ -3,13 +3,17 @@ const app = new Vue({
     data(){
       return {
         loading: true,
-        items: []
+        items: [],
+        searchTerm: ''
       }
     },
     created() {
       this.fetchData();
     },
     methods: {
+      search(){
+        alert(this.searchTerm)
+      },
       fetchData(){
         const that = this;
         fetch('/cards/')

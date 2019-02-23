@@ -4,6 +4,9 @@ block content
   div(id='app')
     h1 #{title}
     div #{msg}
+    div 
+      input(name="card-name", v-model="searchTerm")
+      button(v-on:click="search") Search
     h2 Vue List:
     p(v-if="loading") 
       b Loading Items...

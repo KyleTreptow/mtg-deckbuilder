@@ -13,10 +13,15 @@ router.get('/', function(req, res, next) {
 
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
-  mtg.card.where({ supertypes: 'legendary', subtypes: 'praetor|god' })
-  .then(result => {
-    res.json(result);
-  });
+  mtg.card.where({
+    name: req.query.name,
+    supertypes: req.query.supertypes,
+    types: req.query.types,
+    subtypes:req.query.subtypes
+  })
+  .then(results => {
+    res.json(results)
+  })
 });
 
 module.exports = router;
