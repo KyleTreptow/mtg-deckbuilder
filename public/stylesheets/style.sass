@@ -1,2 +1,34 @@
+// sass --watch public/stylesheets --style compressed
+
+$bfs: 16px
+$blh: 30px
+
 body
   border: solid 1px red
+
+.grid
+  display: block
+  text-align: center
+  font-size: 0
+  &__col
+    width: 100%
+  @media screen and (min-width: 420px)
+    &__col
+      width: 50%
+      display: inline-block
+      vertical-align: top
+      font-size: $bfs
+  @media screen and (min-width: 768px)
+    &__col
+      width: 25%
+
+.card
+  padding: 0 $blh/2
+  margin-bottom: $blh
+  &__title
+    font-size: $bfs
+  &__art
+    text-align: center
+  &__img
+    display: inline-block
+    max-width: 100%
