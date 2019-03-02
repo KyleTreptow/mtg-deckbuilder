@@ -9,33 +9,14 @@ body, h1, h2, h3, h4, h5 ,h6
 h1, h2, h3, h4, h5 ,h6
   font-weight: bold
 
-.grid
-  display: block
-  text-align: center
-  font-size: 0
-  &__col
-    width: 100%
-  @media screen and (min-width: 420px)
-    &__col
-      width: 50%
-      display: inline-block
-      vertical-align: top
-      font-size: $bfs
-  @media screen and (min-width: 768px)
-    &__col
-      width: 25%
+// Components
+@import "components/_card.sass"
+@import "components/_grid.sass"
+@import "components/_loader.sass"
 
-.card
-  padding: 0 $blh/2
-  margin-bottom: $blh
-  &__title
-    font-size: $bfs
-    margin: 0 0 $blh/2 0
-  &__art
-    text-align: center
-  &__img
-    display: inline-block
-    max-width: 100%
+
+
+
 
 
 

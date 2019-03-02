@@ -8,8 +8,12 @@ block content
       input(name="card-name", v-model="searchTerm")
       button(v-on:click="search") Search
     h2 Vue List:
-    p(v-if="loading") 
-      b Loading Items...
+    //- Loader
+    div(v-if="loading") 
+      div(class="loader") 
+        div(class="loader__spinner")
+          div(v-for="index in 4" :key="index" class="loader__dot")
+    //- Grid of Results
     div(v-else class="grid")   
       div(v-for="item in items" class="grid__col") 
         div(class="card")
