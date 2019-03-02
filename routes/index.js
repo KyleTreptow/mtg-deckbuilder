@@ -41,10 +41,10 @@ router.get('/', function(req, res, next) {
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   mtg.card.where({
-    name: 'Vorinclex',
+    name: req.query.name,
     supertypes: req.query.supertypes,
     types: req.query.types,
-    subtypes: req.query.subtypes
+    subtypes: 'god|praetor'
   })
   .then(results => {
     for (i = 0; i < results.length; i++) {
