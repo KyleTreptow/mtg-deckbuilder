@@ -17,7 +17,7 @@ router.get('/cards/', function(req, res, next) {
     name: req.query.name,
     supertypes: req.query.supertypes,
     types: req.query.types,
-    subtypes:req.query.subtypes
+    subtypes: 'god|praetor'
   })
   .then(results => {
     res.json(results)

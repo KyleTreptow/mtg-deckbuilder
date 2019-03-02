@@ -14,9 +14,19 @@ block content
       div(v-for="item in items" class="grid__col") 
         div(class="card")
           h2(class="card__title") {{item.name}} 
+          p cmc: {{item.cmc}}
           div(class="card__art")
-            img(v-if="item.imageUrl" v-bind:src="item.imageUrl" class="card__img")
-            img(v-else v-bind:src="'/images/card-back.jpg'" class="card__img")
+            img(
+              v-if="item.imageUrl" 
+              v-bind:src="item.imageUrl " 
+              class="card__img"
+              alt="item.name"
+              )
+            img(
+              v-else v-bind:src="'/images/card-back.jpg'" 
+              class="card__img"
+              alt="No Card Art Found"
+              )
     
   script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
   script(src='/javascripts/app.js')
