@@ -24,8 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(mw({ option1: '1', option2: '2' })) // example
-
 app.use('/', index);
 app.use('/users', users);
 

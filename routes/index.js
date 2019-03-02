@@ -3,6 +3,33 @@ var router = express.Router();
 
 var mtg = require('mtgsdk');
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/mtg-deckbuilder', {useNewUrlParser: true});
+
+const Card = mongoose.model('Card', {
+  name: String,
+  manaCost: String,
+  cmc: Number,
+  colors: [String],
+  colorIdentity: [String],
+  type: String,
+  supertypes: [String],
+  types: [String],
+  subtypes: [String],
+  rarity: String,
+  set: String,
+  setName: String,
+  text: String,
+  artist: String,
+  number: String,
+  power: String,
+  toughness: String,
+  layout: String,
+  multiverseid: Number,
+  imageUrl: String,
+  id: String
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
@@ -14,12 +41,22 @@ router.get('/', function(req, res, next) {
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   mtg.card.where({
-    name: req.query.name,
+    name: 'Vorinclex',
     supertypes: req.query.supertypes,
     types: req.query.types,
-    subtypes: 'god|praetor'
+    subtypes: req.query.subtypes
   })
   .then(results => {
+    for (i = 0; i < results.length; i++) {
+      const card = new Card(results[i]);
+      Card.find({ 'id': card["id"] }, function (err, docs) {
+        if (docs.length === 0){
+          card.save().then(() => console.log('saving card'));
+        } else {
+          console.log("Card already exists in DB")
+        }
+      });
+    }
     res.json(results)
   })
 });
