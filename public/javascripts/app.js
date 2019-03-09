@@ -4,10 +4,13 @@ const app = new Vue({
       return {
         loading: true,
         items: [],
-        searchName: '',
-        searchSupertypes: '',
-        searchTypes: '',
-        searchSubtypes: ''
+        searchParams: {
+          name: '',
+          supertypes: '',
+          types: '',
+          subtypes: '',
+          colors: []
+        }
       }
     },
     created() {
@@ -17,12 +20,7 @@ const app = new Vue({
       search(e){
         const that = this;
         var url = '/cards/';
-        var data = {
-          name: this.searchName,
-          supertypes: this.searchSupertypes,
-          types: this.searchTypes,
-          subtypes: this.searchSubtypes
-        };
+        var data = this.searchParams;
         that.loading = true;
         fetch(url, {
           method: 'POST', // or 'PUT'
@@ -75,6 +73,9 @@ const app = new Vue({
         .catch(function(err) {
           console.log('Fetch Error :-S', err);
         });
+      },
+      printColors: function(colors){
+        return colors.join(', ');
       }
     }
 });

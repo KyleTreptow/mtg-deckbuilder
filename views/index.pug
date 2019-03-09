@@ -5,16 +5,34 @@ block content
     h1 #{title}
     p #{msg}
     div 
-      form(id="searchform", v-on:submit.prevent="search")
-        label(for="card-name") Name: &nbsp;
-          input(name="card-name", v-model="searchName")
-        label(for="card-supertypes") Super: &nbsp;
-          input(name="card-supertypes", v-model="searchSupertypes")
-        label(for="card-types") Types: &nbsp;
-          input(name="card-types", v-model="searchTypes")
-        label(for="card-subtypes") Sub: &nbsp;
-          input(name="card-subtypes", v-model="searchSubtypes")
-        button Search
+      form(id="searchform", v-on:submit.prevent="search", class="form")
+        div(class="form__row")
+          div(class="checkbox")
+            span(class="checkbox__item")
+              input(type="checkbox", name="color", value="White", v-model="searchParams.colors", class="checkbox__input")
+              label White
+            span(class="checkbox__item")
+              input(type="checkbox", name="color", value="Blue", v-model="searchParams.colors", class="checkbox__input")
+              label Blue
+            span(class="checkbox__item")
+              input(type="checkbox", name="color", value="Black", v-model="searchParams.colors", class="checkbox__input")
+              label Black
+            span(class="checkbox__item")
+              input(type="checkbox", name="color", value="Red", v-model="searchParams.colors", class="checkbox__input")
+              label Red
+            span(class="checkbox__item")
+              input(type="checkbox", name="color", value="Green", v-model="searchParams.colors", class="checkbox__input")
+              label Green
+        div(class="form__row")
+          label(for="card-name", class="form__label") Name: &nbsp;
+            input(name="card-name", v-model="searchParams.name")
+          label(for="card-supertypes", class="form__label") Super: &nbsp;
+            input(name="card-supertypes", v-model="searchParams.supertypes")
+          label(for="card-types", class="form__label") Types: &nbsp;
+            input(name="card-types", v-model="searchParams.types")
+          label(for="card-subtypes", class="form__label") Sub: &nbsp;
+            input(name="card-subtypes", v-model="searchParams.subtypes ")
+          button Search
     h2 Vue List:
     //- Loader
     div(v-if="loading") 
@@ -24,21 +42,22 @@ block content
     //- Grid of Results
     div(v-else class="grid")   
       div(v-for="item in items" class="grid__col") 
-        div(class="card")
+        div(class="card", :data-color-idt="item.colorIdentity")
           h2(class="card__title") {{item.name}} 
           p cmc: {{item.cmc}}
+          p {{ printColors(item.colors) }}
           div(class="card__art")
             img(
               v-if="item.imageUrl" 
               v-bind:src="item.imageUrl " 
               class="card__img"
               alt="item.name"
-              )
+            )
             img(
               v-else v-bind:src="'/images/card-back.jpg'" 
               class="card__img"
               alt="No Card Art Found"
-              )
+            )
     
   script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
   script(src='/javascripts/app.js')

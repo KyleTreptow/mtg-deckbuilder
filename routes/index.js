@@ -44,7 +44,8 @@ router.get('/cards/', function(req, res, next) {
     name: '',
     supertypes: '',
     types: '',
-    subtypes: ''
+    subtypes: '',
+    colors: ''
   })
   .then(results => {
     for (i = 0; i < results.length; i++) {
@@ -53,7 +54,7 @@ router.get('/cards/', function(req, res, next) {
         if (docs.length === 0){
           card.save().then(() => console.log('saving card'));
         } else {
-          console.log("Card already exists in DB")
+          console.log("Card already exists in DB");
         }
       });
     }
@@ -61,13 +62,20 @@ router.get('/cards/', function(req, res, next) {
   })
 });
 
-/* GET sample card data. */
+/* POST */
 router.post('/cards/', function(req, res, next) {
+
+  // convert req.body to usable strings
+  console.log(req.body);
+  var qColors = req.body.colors.join();
+
+  // make call to API
   mtg.card.where({
     name: req.body.name,
     supertypes: req.body.supertypes,
     types: req.body.types,
-    subtypes: req.body.subtypes
+    subtypes: req.body.subtypes,
+    colors: qColors
   })
   .then(results => {
     for (i = 0; i < results.length; i++) {
