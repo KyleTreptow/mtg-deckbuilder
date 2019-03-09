@@ -39,17 +39,20 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET sample card data. */
-router.get('/cards/', function(req, res, next) {
+router.post('/cards/', function(req, res, next) {
   mtg.card.where({
-    name: 'Vorinclex',
-    supertypes: req.query.supertypes,
-    types: req.query.types,
-    subtypes: req.query.subtypes
+    name: req.body.name,
+    supertypes: req.body.supertypes,
+    types: req.body.types,
+    subtypes: req.body.subtypes
   })
   .then(results => {
+    //iterate over all card results
     for (i = 0; i < results.length; i++) {
+      //model card
       const card = new Card(results[i]);
       Card.find({ 'id': card["id"] }, function (err, docs) {
+        //if card does not exist, save it in DB
         if (docs.length === 0){
           card.save().then(() => console.log('saving card'));
         } else {
@@ -57,6 +60,7 @@ router.get('/cards/', function(req, res, next) {
         }
       });
     }
+    //return JSON to our API
     res.json(results)
   })
 });

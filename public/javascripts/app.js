@@ -12,11 +12,23 @@ const app = new Vue({
     },
     methods: {
       search(){
-        alert(this.searchTerm)
+        var that = this;
+        var url = '/cards/';
+        var data = {name: this.searchTerm};
+        that.loading = true;
+        fetch(url, {
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(data), // data can be `string` or {object}!
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }).then(res => res.json())
+          .then(response => {that.items = response; that.loading = false;})
+          .catch(error => console.error('Error:', error));
       },
       fetchData(){
         const that = this;
-        fetch('/cards/')
+        fetch('/cards/', {method: 'POST'})
         .then(
           function(response) {
             if (response.status !== 200) {
