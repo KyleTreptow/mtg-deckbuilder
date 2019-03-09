@@ -3,10 +3,17 @@ extends layout
 block content
   div(id='app')
     h1 #{title}
-    div #{msg}
+    p #{msg}
     div 
       form(id="searchform", v-on:submit.prevent="search")
-        input(name="card-name", v-model="searchTerm")
+        label(for="card-name") Name: &nbsp;
+          input(name="card-name", v-model="searchName")
+        label(for="card-supertypes") Super: &nbsp;
+          input(name="card-supertypes", v-model="searchSupertypes")
+        label(for="card-types") Types: &nbsp;
+          input(name="card-types", v-model="searchTypes")
+        label(for="card-subtypes") Sub: &nbsp;
+          input(name="card-subtypes", v-model="searchSubtypes")
         button Search
     h2 Vue List:
     //- Loader

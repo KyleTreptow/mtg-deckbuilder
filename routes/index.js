@@ -41,10 +41,10 @@ router.get('/', function(req, res, next) {
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   mtg.card.where({
-    name: req.body.name,
-    supertypes: req.body.supertypes,
-    types: req.body.types,
-    subtypes: req.body.subtypes
+    name: '',
+    supertypes: '',
+    types: '',
+    subtypes: ''
   })
   .then(results => {
     for (i = 0; i < results.length; i++) {

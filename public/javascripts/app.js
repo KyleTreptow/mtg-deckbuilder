@@ -4,7 +4,10 @@ const app = new Vue({
       return {
         loading: true,
         items: [],
-        searchTerm: ''
+        searchName: '',
+        searchSupertypes: '',
+        searchTypes: '',
+        searchSubtypes: ''
       }
     },
     created() {
@@ -14,7 +17,12 @@ const app = new Vue({
       search(e){
         const that = this;
         var url = '/cards/';
-        var data = { name: this.searchTerm };
+        var data = {
+          name: this.searchName,
+          supertypes: this.searchSupertypes,
+          types: this.searchTypes,
+          subtypes: this.searchSubtypes
+        };
         that.loading = true;
         fetch(url, {
           method: 'POST', // or 'PUT'
