@@ -5,8 +5,9 @@ block content
     h1 #{title}
     div #{msg}
     div 
-      input(name="card-name", v-model="searchTerm")
-      button(v-on:click="search") Search
+      form(id="searchform", v-on:submit.prevent="search")
+        input(name="card-name", v-model="searchTerm")
+        button Search
     h2 Vue List:
     //- Loader
     div(v-if="loading") 

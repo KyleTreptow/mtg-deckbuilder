@@ -34,17 +34,40 @@ const Card = mongoose.model('Card', {
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'MTG Deck Builder',
-    msg: 'Grabbing Sample Cards: subtype = God OR Praetor'
+    msg: 'Grabbing Sample Cards'
   });
 });
 
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   mtg.card.where({
-    name: req.query.name,
-    supertypes: req.query.supertypes,
-    types: req.query.types,
-    subtypes: 'god|praetor'
+    name: req.body.name,
+    supertypes: req.body.supertypes,
+    types: req.body.types,
+    subtypes: req.body.subtypes
+  })
+  .then(results => {
+    for (i = 0; i < results.length; i++) {
+      const card = new Card(results[i]);
+      Card.find({ 'id': card["id"] }, function (err, docs) {
+        if (docs.length === 0){
+          card.save().then(() => console.log('saving card'));
+        } else {
+          console.log("Card already exists in DB")
+        }
+      });
+    }
+    res.json(results)
+  })
+});
+
+/* GET sample card data. */
+router.post('/cards/', function(req, res, next) {
+  mtg.card.where({
+    name: req.body.name,
+    supertypes: req.body.supertypes,
+    types: req.body.types,
+    subtypes: req.body.subtypes
   })
   .then(results => {
     for (i = 0; i < results.length; i++) {
