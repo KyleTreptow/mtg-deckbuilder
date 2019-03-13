@@ -76,6 +76,9 @@ const app = new Vue({
       },
       printColors: function(colors){
         return colors.join(', ');
+      },
+      logCardDetails(data){
+        console.log(data);
       }
     }
 });

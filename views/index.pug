@@ -41,11 +41,11 @@ block content
           div(v-for="index in 4" :key="index" class="loader__dot")
     //- Grid of Results
     div(v-else class="grid")   
-      div(v-for="item in items" class="grid__col") 
+      div(v-for="item in items" class="grid__col", v-if="item.multiverseid") 
         div(class="card", :data-color-idt="item.colorIdentity")
           h2(class="card__title") {{item.name}} 
-          p cmc: {{item.cmc}}
-          p {{ printColors(item.colors) }}
+          p(class="card__info") cmc: {{item.cmc}}
+          p(class="card__info") {{ printColors(item.colors) }}
           div(class="card__art")
             img(
               v-if="item.imageUrl" 
@@ -58,6 +58,10 @@ block content
               class="card__img"
               alt="No Card Art Found"
             )
+          footer(class="card__footer")
+            div
+              button(class="card__detail-btn", @click="logCardDetails(item)") View Details
+            small(class="card__mid") {{item.multiverseid}}
     
   script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
   script(src='/javascripts/app.js')
