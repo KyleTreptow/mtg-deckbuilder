@@ -3,8 +3,12 @@ var router = express.Router();
 
 var mtg = require('mtgsdk');
 
+var query_builder = require('../helpers/query_builder.js');
+
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/mtg-deckbuilder', {useNewUrlParser: true});
+
 
 const Card = mongoose.model('Card', {
   name: String,
@@ -41,11 +45,13 @@ router.get('/', function(req, res, next) {
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   mtg.card.where({
+    page: 10,
+    pageSize: 1,
     name: '',
     supertypes: '',
     types: '',
     subtypes: '',
-    colors: ''
+    colors: '',
   })
   .then(results => {
     for (i = 0; i < results.length; i++) {
