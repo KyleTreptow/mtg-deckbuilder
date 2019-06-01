@@ -45,8 +45,8 @@ router.get('/', function(req, res, next) {
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   qo = {
-    page: 10,
-    pageSize: 1,
+    page: '1',
+    pageSize: '10',
     name: '',
     supertypes: '',
     types: '',
