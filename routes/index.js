@@ -34,6 +34,8 @@ const Card = mongoose.model('Card', {
   id: String
 });
 
+var log = console.log;
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
@@ -58,20 +60,20 @@ router.get('/cards/', function(req, res, next) {
       const card = new Card(results[i]);
       Card.find({ 'id': card["id"] }, function (err, docs) {
         if (docs.length === 0){
-          card.save().then(() => console.log('saving card'));
+          card.save().then(() => log(`Saving card: #${results.length}`));
         } else {
           console.log("Card already exists in DB")
         }
       });
     }
-    res.json(results)
+    res.json(results);
   })
 });
 
 /* POST */
 router.post('/cards/', function(req, res, next) {
   // convert req.body to usable strings
-  console.log(req.body);
+  log(req.body);
   var qColors = req.body.colors.join();
   qo = {
     name: req.body.name,
@@ -85,13 +87,13 @@ router.post('/cards/', function(req, res, next) {
       const card = new Card(results[i]);
       Card.find({ 'id': card["id"] }, function (err, docs) {
         if (docs.length === 0){
-          card.save().then(() => console.log('saving card'));
+          card.save().then(() => log(`Saving card: #${results.length}`));
         } else {
-          console.log("Card already exists in DB")
+          log(`Card already exists in DB: #${results.length}`);
         }
       });
     }
-    res.json(results)
+    res.json(results);
   })
 });
 

@@ -74,8 +74,14 @@ const app = new Vue({
           console.log('Fetch Error :-S', err);
         });
       },
+      arrayIsset: function(arr){
+        return (arr != undefined && arr.length != 0) ? true : false;
+      },
       printColors: function(colors){
-        return colors.join(', ');
+        return this.arrayIsset(colors) ? colors.join(', ') : 'Colorless';
+      },
+      logCardDetails(data){
+        console.log(data);
       }
     }
 });
