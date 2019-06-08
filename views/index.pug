@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  div(id="app", class="app")
+  div(id="app", class="app" v-scroll="handleScroll")
     div(class="app__header")
       header(class="header")
         span #{title} &nbsp; | &nbsp; #{msg}
-    div(class="app__body") 
+    div(class="app__body")
       section(class="section")
         form(id="searchform", v-on:submit.prevent="search", class="form")
           div(class="form__row")
@@ -37,26 +37,26 @@ block content
             button Search
       section(class="section")
         //- Loader
-        div(v-if="loading") 
-          div(class="loader") 
+        div(v-if="loading")
+          div(class="loader")
             div(class="loader__spinner")
               div(v-for="index in 4" :key="index" class="loader__dot")
         //- Grid of Results
-        div(v-else class="grid")   
-          div(v-for="item in items" class="grid__col", v-if="item.multiverseid") 
+        div(v-else class="grid")
+          div(v-for="item in items" class="grid__col", v-if="item.multiverseid")
             div(class="card", :data-color-idt="item.colorIdentity")
-              h2(class="card__title") {{item.name}} 
+              h2(class="card__title") {{item.name}}
               p(class="card__info") cmc: {{item.cmc}}
               p(class="card__info") {{ printColors(item.colors) }}
               div(class="card__art")
                 img(
-                  v-if="item.imageUrl" 
-                  v-bind:src="item.imageUrl " 
+                  v-if="item.imageUrl"
+                  v-bind:src="item.imageUrl "
                   class="card__img"
                   alt="item.name"
                 )
                 img(
-                  v-else v-bind:src="'/images/card-back.jpg'" 
+                  v-else v-bind:src="'/images/card-back.jpg'"
                   class="card__img"
                   alt="No Card Art Found"
                 )
@@ -64,7 +64,6 @@ block content
                 div
                   button(class="card__detail-btn", @click="logCardDetails(item)") View Details
                 small(class="card__mid") {{item.multiverseid}}
-    
+
   script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
   script(src='/javascripts/app.js')
-    

@@ -1,3 +1,14 @@
+Vue.directive('scroll', {
+  inserted: function (el, binding) {
+    let f = function (evt) {
+      if (binding.value(evt, el)) {
+        window.removeEventListener('scroll', f)
+      }
+    }
+    window.addEventListener('scroll', f)
+  }
+})
+
 const app = new Vue({
   el: '#app',
     data(){
@@ -82,6 +93,13 @@ const app = new Vue({
       },
       logCardDetails(data){
         console.log(data);
+      },
+      handleScroll(evt, el) {
+        const that = this;
+        if (document.body.clientHeight- window.innerHeight - window.scrollY < 50) {
+          alert("END OF PAGE")
+        }
+        //return window.scrollY > 100
       }
     }
 });

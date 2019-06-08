@@ -80,7 +80,9 @@ router.post('/cards/', function(req, res, next) {
     supertypes: req.body.supertypes,
     types: req.body.types,
     subtypes: req.body.subtypes,
-    colors: qColors
+    colors: qColors,
+    page: 1,
+    pageSize: 10
   }
   query_builder(qo).then(results=>{
     for (i = 0; i < results.length; i++) {

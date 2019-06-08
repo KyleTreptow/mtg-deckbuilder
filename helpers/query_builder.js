@@ -30,6 +30,7 @@ module.exports = function buildQuery(user_query) {
   }
 
   const baseURL = `https://api.magicthegathering.io/v1/cards/?name=${qo.name}&layout=${qo.layout}&cmc=${qo.cmc}&colors=${qo.colors}&colorIdentity=${qo.colorIdentity}&type=${qo.type}&supertypes=${qo.supertypes}&types=${qo.subtypes}&rarity=${qo.rarity}&set=${qo.set}&setName=${qo.setName}&text=${qo.text}&flavor=${qo.flavor}&artist=${qo.artist}&number=${qo.number}&power=${qo.power}&toughness=${qo.toughness}&loyalty=${qo.loyalty}&container=${qo.contains}&page=${qo.page}&pageSize=${qo.pageSize}`
+  console.log(baseURL)
   return fetch(baseURL)
   .then(data=>{return data.json()})
   .then(result=>{return result.cards})
