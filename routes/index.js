@@ -47,8 +47,8 @@ router.get('/', function(req, res, next) {
 /* GET sample card data. */
 router.get('/cards/', function(req, res, next) {
   qo = {
-    page: 10,
-    pageSize: 1,
+    page: 1,
+    pageSize: 20,
     name: '',
     supertypes: '',
     types: '',
@@ -76,6 +76,8 @@ router.post('/cards/', function(req, res, next) {
   log(req.body);
   var qColors = req.body.colors.join();
   qo = {
+    page: 1,
+    pageSize: 20,
     name: req.body.name,
     supertypes: req.body.supertypes,
     types: req.body.types,

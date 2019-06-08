@@ -6,3 +6,24 @@
     display: block
   &__footer
     display: block
+  &__aside
+    background: transparent
+  &__main
+    background: #fff
+  @media screen and (max-width: 991px)
+    &__aside
+      background: #eee
+  @media screen and (min-width: 992px)
+    &__body
+      font-size: 0
+      background: #eee
+    &__aside,
+    &__main
+      font-size: $bfs
+      display: inline-block
+      vertical-align: top
+      min-height: 90vh
+    &__aside
+      width: 30%
+    &__main
+      width: 70%
