@@ -76,15 +76,13 @@ router.post('/cards/', function(req, res, next) {
   log(req.body);
   var qColors = req.body.colors.join();
   qo = {
-    page: 1,
+    page: req.body.page,
     pageSize: 20,
     name: req.body.name,
     supertypes: req.body.supertypes,
     types: req.body.types,
     subtypes: req.body.subtypes,
-    colors: qColors,
-    page: 1,
-    pageSize: 10
+    colors: qColors
   }
   query_builder(qo).then(results=>{
     for (i = 0; i < results.length; i++) {

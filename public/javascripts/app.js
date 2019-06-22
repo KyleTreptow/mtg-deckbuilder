@@ -20,7 +20,8 @@ const app = new Vue({
           supertypes: '',
           types: '',
           subtypes: '',
-          colors: []
+          colors: [],
+          page: 1
         }
       }
     },
@@ -32,6 +33,7 @@ const app = new Vue({
         const that = this;
         var url = '/cards/';
         var data = this.searchParams;
+        console.log(this.searchParams)
         that.loading = true;
         fetch(url, {
           method: 'POST', // or 'PUT'
@@ -51,8 +53,8 @@ const app = new Vue({
             }
             // Response
             response.json().then(function(data) {
-              console.log(data);
-              that.items = data;
+              data.map(d => that.items.push(d));
+              console.log(that.items);
               that.loading = false;
             });
           }
@@ -95,9 +97,12 @@ const app = new Vue({
         console.log(data);
       },
       handleScroll(evt, el) {
-        const that = this;
-        if (document.body.clientHeight- window.innerHeight - window.scrollY < 50) {
-          alert("END OF PAGE")
+        if (this.loading == false) {
+          if (document.body.clientHeight- window.innerHeight - window.scrollY < 50) {
+            this.searchParams.page = this.searchParams.page + 1
+            console.log(this.searchParams.page)
+            this.search()
+          }
         }
         //return window.scrollY > 100
       }
